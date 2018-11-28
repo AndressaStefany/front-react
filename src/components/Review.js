@@ -21,14 +21,14 @@ class Review extends Component{
                     <br/>
                     {this.state.item.comments}
                     <br /><br />
-                    <Button 
+                    {/* <Button 
                         variant="contained" 
                         size="small" 
                         color="primary" 
                         component={Link} 
                         to={`/reviews/${this.state.item.id}`}>
                         Edit
-                    </Button>
+                    </Button> */}
                 </div>
                 <Divider variant="middle" />
              </li>

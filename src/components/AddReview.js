@@ -40,7 +40,7 @@ class AddReview extends React.Component {
         this.setState({
           [name]: event.target.value,
         });
-      };
+    };
 
     render() {
         return (
@@ -52,7 +52,6 @@ class AddReview extends React.Component {
                 <TextField
                     id="outlined-select-coffee"
                     name="coffee"
-                    // inputRef="coffee"
                     select
                     label="Select"
                     value={this.state.coffee}

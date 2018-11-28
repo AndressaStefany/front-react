@@ -26,29 +26,44 @@ const styles = theme => ({
 });
 
 class Signin extends React.Component {
-  state = {
-    email: '',
-    password: '',
-    showPassword: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      showPassword: false,
+    };
 
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    console.log(this.state);
+    event.preventDefault();
+  }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
   };
 
   handleClickShowPassword = () => {
-    this.setState(state => ({ showPassword: !state.showPassword }));
+    this.setState({ showPassword: !this.state.showPassword });
   };
 
   render() {
     const { classes } = this.props;
 
     return (
-      <form className={classes.root}>
+      <form className={classes.root} onSubmit={this.handleSubmit}>
         <h1>Sign In</h1>
         <TextField
           id="outlined-email-input"
           label="Email"
+          value={this.state.email}
+          onChange={this.handleChange('email')}
           type="email"
           name="email"
           autoComplete="email"
@@ -82,6 +97,8 @@ class Signin extends React.Component {
           }}
         />
         <Button 
+          type="submit"
+          value="Submit"
           variant="contained" 
           color="primary" 
           className={classes.button}>

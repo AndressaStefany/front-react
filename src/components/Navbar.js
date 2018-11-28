@@ -23,6 +23,7 @@ const styles = {
 
 function ButtonAppBar(props) {
   const { classes } = props;
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -30,13 +31,12 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
           <Link className='linkNavbar' to='/'>Coffe Shop</Link>
           </Typography>
-
           <Link className='linkNavbar' to='/signin' button>
             <ListItem button>
                 Sign In
             </ListItem>
           </Link>
-
+        
           <Link className='linkNavbar' to='/signup' button>
             <ListItem button>            
                 Sign Up
