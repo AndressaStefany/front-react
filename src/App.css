@@ -13,3 +13,12 @@ body {
     color: white!important;
     text-decoration: none!important;
 }
+
+li {
+    list-style-type: none
+}
+
+.marginBottomTop2-percent{
+    margin-bottom: 2%;
+    margin-top: 2%;
+}

@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import '../App.css';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = {
   root: {
@@ -29,18 +28,18 @@ function ButtonAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-          <Link className='linkNavbar' to='/'>Cooffe Shop</Link>
+          <Link className='linkNavbar' to='/'>Coffe Shop</Link>
           </Typography>
 
           <Link className='linkNavbar' to='/signin' button>
             <ListItem button>
-                <ListItemText classes='linkNavbar' primary="Sign In" />
+                Sign In
             </ListItem>
           </Link>
 
           <Link className='linkNavbar' to='/signup' button>
-            <ListItem button>
-                <ListItemText primary="Sign Up" />
+            <ListItem button>            
+                Sign Up
             </ListItem>
           </Link>
         </Toolbar>
