@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -27,10 +27,8 @@ const styles = theme => ({
 
 class Signin extends React.Component {
   state = {
-    amount: '',
+    email: '',
     password: '',
-    weight: '',
-    weightRange: '',
     showPassword: false,
   };
 
@@ -83,8 +81,19 @@ class Signin extends React.Component {
             ),
           }}
         />
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          className={classes.button}>
             Sign In
+        </Button>        
+        <Button 
+        className='buttomBack'
+          variant="contained" 
+          color="default" 
+          component={ Link } 
+          to='/'>
+            Back
         </Button>
       </form>
     );

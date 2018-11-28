@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -93,6 +94,14 @@ class Signup extends React.Component {
         />
         <Button variant="contained" color="primary" className={classes.button}>
             Sign Up
+        </Button>
+        <Button 
+          className='buttomBack'
+          variant="contained" 
+          color="default" 
+          component={ Link } 
+          to='/'>
+            Back
         </Button>
       </form>
     );

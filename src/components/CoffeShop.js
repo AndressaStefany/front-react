@@ -1,6 +1,10 @@
-import React, {Component} from 'react'
-import axios from 'axios'
-import Divider from '@material-ui/core/Divider'
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Review from './Review';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import '../App.css';
 
 class CoffeeShop extends Component{
     constructor(){
@@ -11,35 +15,36 @@ class CoffeeShop extends Component{
     }
 
     componentWillMount(){
-        this.getCoffeShop();
+        this.getReviews();
     }
 
-    getCoffeShop(){
+    getReviews(){
         axios.get('http://localhost:3000/api/Reviews')
         .then(response => {
             this.setState({reviews: response.data}, ()=>{
-                console.log(this.state);
-                // console.log(new Intl.DateTimeFormat('en-GB').format(this.state.reviews.date));
             })
         })
+        .catch(err => console.log(err));
     }
 
     render(){
         const reviewsItem = this.state.reviews.map((review, i)=> {
             return(
-                <li>
-                    <div className='marginBottomTop2-percent'>
-                    {review.date} | {review.coffeeShopId}
-                    <br/>
-                    {review.comments}
-                    </div>
-                    <Divider variant="middle" />
-                </li>
+                <Review key={review.id} item={review} />
             )
         })
         return (
             <div>
-                <h1>Coffee Shop</h1>
+                <h1>Reviews</h1>
+                <Fab 
+                    position="fixed" 
+                    color="secondary" 
+                    aria-label="Add" 
+                    className='marginBottomTop2-percent'
+                    component={Link} 
+                    to={'/add'}>
+                    <AddIcon />
+                </Fab>
                 <ul>{reviewsItem}</ul>
             </div>
         )

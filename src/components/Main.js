@@ -4,6 +4,8 @@ import CoffeeShop from './CoffeShop';
 import About from './About';
 import Signin from './Signin';
 import Signup from './Signup';
+import EditReview from './EditReview';
+import AddReview from './AddReview';
 
 const Main = () => (
     <main>
@@ -12,6 +14,9 @@ const Main = () => (
             <Route exact path='/about' component={About} />
             <Route exact path='/signin' component={Signin} />
             <Route exact path='/signup' component={Signup} />
+            <Route exact path='/reviews/:id' component={EditReview} />
+            <Route exact path='/add' component={AddReview} />
+            
         </Switch>
     </main>
 )
