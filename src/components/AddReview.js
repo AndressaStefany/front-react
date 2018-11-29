@@ -25,8 +25,7 @@ class AddReview extends React.Component {
         this.state = {
             comment: '',
             coffee: '1',
-        };
-    
+        };    
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -47,7 +46,6 @@ class AddReview extends React.Component {
         <div>
             <br />      
             <h1>Add Review</h1>
-            {/* <form onSubmit={this.onSubmit.bind(this)}> */}
             <form onSubmit={this.handleSubmit}>
                 <TextField
                     id="outlined-select-coffee"

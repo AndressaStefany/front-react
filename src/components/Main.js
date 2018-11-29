@@ -5,6 +5,7 @@ import Signin from './Signin';
 import Signup from './Signup';
 import EditReview from './EditReview';
 import AddReview from './AddReview';
+import Login from './Login';
 
 const Main = () => (
     <main>
@@ -14,6 +15,7 @@ const Main = () => (
             <Route exact path='/signup' component={Signup} />
             <Route exact path='/reviews/:id' component={EditReview} />
             <Route exact path='/add' component={AddReview} />
+            <Route exact path='/login' component={Login} />
         </Switch>
     </main>
 )

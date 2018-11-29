@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,6 +8,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import { loginRoute, request, saveTokenCookie } from "./Auth/config";
 
 const styles = theme => ({
   root: {
@@ -17,6 +18,20 @@ const styles = theme => ({
     marginLeft: 200,
     marginRight: 200 
   },
+  formContainer: {
+    padding: 15,
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.common.white,
+    display: "flex",
+    flexFlow: "column",
+    maxWidth: 400,
+    minWidth: 290,
+    width: "25%"
+  },
+  form: {
+    display: "flex",
+    flexFlow: "column"
+  },
   margin: {
     margin: theme.spacing.unit,
   },
@@ -25,23 +40,22 @@ const styles = theme => ({
   },
 });
 
-class Signin extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      showPassword: false,
-    };
+class Signin extends Component {
+  state = {
+    email: "",
+    password: "",
+    showPassword: false,
+  };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
-    console.log(this.state);
-    event.preventDefault();
-  }
+  handleSubmit = e => {
+    e && e.preventDefault();
+    const { email, password } = this.state;
+    
+    request.post(loginRoute, { email, password }).then(response => {
+      saveTokenCookie(response.data.id);
+      this.props.changeLogged(!!response.data.id);
+    });
+  };
 
   handleChange = name => event => {
     this.setState({
@@ -101,9 +115,10 @@ class Signin extends React.Component {
           value="Submit"
           variant="contained" 
           color="primary" 
-          className={classes.button}>
+          className={classes.button}
+          onClick={this.handleSubmit}>
             Sign In
-        </Button>        
+        </Button>
         <Button 
         className='buttomBack'
           variant="contained" 
