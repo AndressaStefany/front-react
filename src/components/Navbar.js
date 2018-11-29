@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React,{ Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import '../App.css';
 import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
+import { deleteTokenCookie,getCookie } from './Auth/config';
+import '../App.css';
 
 const styles = {
   root: {
@@ -21,38 +21,50 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
-  const { classes } = props;
-  const teste = props.logged;
+class Navbar extends Component {
+  state = {
+    logged: !!getCookie("token")
+  };
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-          <Link className='linkNavbar' to='/'>Coffe Shop</Link>
-          </Typography>
-          {(teste) && 
-          <Link className='linkNavbar' to='/signin' button>
-            <ListItem button>
-                Sign In
-            </ListItem>
-          </Link>
-          }
-        
-          <Link className='linkNavbar' to='/signup' button>
-            <ListItem button>            
-                Sign Up
-            </ListItem>
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+  changeLog = () => {
+    deleteTokenCookie();
+  }
+  
+  render(){
+    return (
+      <div className={styles.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" color="inherit" className={styles.grow}>
+            <Link className='linkNavbar' to='/'>Coffe Shop</Link>
+            </Typography>
+            
+            {!this.state.logged && <Link className='linkNavbar' to='/signin' button>
+              <ListItem button>
+                  Sign In
+              </ListItem>
+            </Link>}
+          
+            {!this.state.logged && <Link className='linkNavbar' to='/signup' button>
+              <ListItem button>            
+                  Sign Up
+              </ListItem>
+            </Link>}
+
+            {this.state.logged && 
+              <Button 
+                className='linkNavbar'
+                onClick={this.changeLog}>
+                Sign Out
+              </Button>
+            }
+
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(ButtonAppBar);
+export default Navbar;

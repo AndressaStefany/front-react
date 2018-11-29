@@ -9,6 +9,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { loginRoute, request, saveTokenCookie } from "./Auth/config";
+import CoffeeShop from './CoffeShop';
 
 const styles = theme => ({
   root: {
@@ -53,7 +54,6 @@ class Signin extends Component {
     
     request.post(loginRoute, { email, password }).then(response => {
       saveTokenCookie(response.data.id);
-      this.props.changeLogged(!!response.data.id);
     });
   };
 
@@ -116,11 +116,12 @@ class Signin extends Component {
           variant="contained" 
           color="primary" 
           className={classes.button}
-          onClick={this.handleSubmit}>
+          onClick={this.handleSubmit}
+          render={() => <CoffeeShop />}>
             Sign In
         </Button>
         <Button 
-        className='buttomBack'
+          className='buttomBack'
           variant="contained" 
           color="default" 
           component={ Link } 

@@ -4,14 +4,13 @@ import axios from 'axios';
 import Review from './Review';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import { getCookie } from './Auth/config';
 import '../App.css';
 
 class CoffeeShop extends Component{
-    constructor(){
-        super();
-        this.state = {
-            reviews: []
-        }
+    state = {
+        reviews: [],
+        logged: !!getCookie("token")
     }
 
     componentWillMount(){
@@ -36,15 +35,17 @@ class CoffeeShop extends Component{
         return (
             <div>
                 <h1>Reviews</h1>
-                <Fab 
-                    position="fixed" 
-                    color="secondary" 
-                    aria-label="Add" 
-                    className='marginBottomTop2-percent'
-                    component={Link} 
-                    to={'/add'}>
-                    <AddIcon />
-                </Fab>
+                {this.state.logged && 
+                    <Fab 
+                        position="fixed" 
+                        color="secondary" 
+                        aria-label="Add" 
+                        className='marginBottomTop2-percent'
+                        component={Link} 
+                        to={'/add'}>
+                        <AddIcon />
+                    </Fab>
+                }
                 <ul>{reviewsItem}</ul>
             </div>
         )
