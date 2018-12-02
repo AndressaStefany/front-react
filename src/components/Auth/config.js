@@ -4,7 +4,9 @@ export const HOST = "http://localhost:3000/api";
 
 export const loginRoute = "/Users/login";
 
-export const todosRoute = "/Reviews";
+export const loginRegister = "/Users";
+
+export const reviewsRoute = "/Reviews";
 
 export function setCookie(cname, cvalue, exmili = 30 * 24 * 60 * 60 * 1000) {
   var d = new Date();

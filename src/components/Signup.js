@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,6 +8,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import { loginRegister, loginRoute, request, saveTokenCookie} from "./Auth/config";
+import { history } from './history';
 
 const styles = theme => ({
   root: {
@@ -28,11 +29,24 @@ const styles = theme => ({
 
 class Signup extends React.Component {
   state = {
-    amount: '',
+    email: '',
     password: '',
-    weight: '',
-    weightRange: '',
     showPassword: false,
+  };
+
+  handleSubmit = e => {
+    e && e.preventDefault();
+    const { email, password } = this.state;
+    console.log({ email, password });
+
+    request.post(loginRegister, { email, password })
+      .then(res => {});
+
+    request.post(loginRoute, { email, password }).then(response => {
+      saveTokenCookie(response.data.id);
+      history.push('/');
+      window.location.reload();
+      });
   };
 
   handleChange = prop => event => {
@@ -49,14 +63,14 @@ class Signup extends React.Component {
     return (
       <form className={classes.root}>
         <h1>Sign Up</h1>
-        <TextField
+        {/* <TextField
           id="outlined-name"
           label="Name"
           onChange={this.handleChange('name')}
           fullWidth
           margin="normal"
           variant="outlined"
-        />
+        /> */}
         <TextField
           id="outlined-email-input"
           label="Email"
@@ -66,6 +80,7 @@ class Signup extends React.Component {
           fullWidth
           margin="normal"
           variant="outlined"
+          onChange={this.handleChange('email')}
         />
         <TextField
           id="outlined-adornment-password"
@@ -92,7 +107,13 @@ class Signup extends React.Component {
             ),
           }}
         />
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button 
+          type="submit" 
+          value="Submit" 
+          variant="contained" 
+          color="primary" 
+          className={classes.button}
+          onClick={(event) => this.handleSubmit(event)}>
             Sign Up
         </Button>
         <Button 

@@ -56,7 +56,7 @@ class Signin extends Component {
     
     request.post(loginRoute, { email, password }).then(response => {
       saveTokenCookie(response.data.id);
-      history.push("/");
+      history.push('/');
       window.location.reload();
     });
   };
@@ -122,7 +122,7 @@ class Signin extends Component {
           variant="contained" 
           color="primary" 
           className={classes.button}
-          onClick={this.handleSubmit}>
+          onClick={(event) => this.handleSubmit(event)}>
             Sign In
         </Button>
         <Button 
