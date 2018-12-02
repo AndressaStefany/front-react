@@ -8,8 +8,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { loginRoute, request, saveTokenCookie } from "./Auth/config";
+import { loginRoute, request, saveTokenCookie, getCookie } from "./Auth/config";
 import CoffeeShop from './CoffeShop';
+import { history } from './history';
 
 const styles = theme => ({
   root: {
@@ -46,6 +47,7 @@ class Signin extends Component {
     email: "",
     password: "",
     showPassword: false,
+    logged: !!getCookie("token")
   };
 
   handleSubmit = e => {
@@ -54,6 +56,8 @@ class Signin extends Component {
     
     request.post(loginRoute, { email, password }).then(response => {
       saveTokenCookie(response.data.id);
+      history.push("/");
+      window.location.reload();
     });
   };
 
@@ -71,7 +75,9 @@ class Signin extends Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.root} onSubmit={this.handleSubmit}>
+      <div>
+      {!this.state.logged && 
+      <form className={classes.root} onSubmit={this.handleSubmit} method="post">
         <h1>Sign In</h1>
         <TextField
           id="outlined-email-input"
@@ -116,8 +122,7 @@ class Signin extends Component {
           variant="contained" 
           color="primary" 
           className={classes.button}
-          onClick={this.handleSubmit}
-          render={() => <CoffeeShop />}>
+          onClick={this.handleSubmit}>
             Sign In
         </Button>
         <Button 
@@ -128,7 +133,9 @@ class Signin extends Component {
           to='/'>
             Back
         </Button>
-      </form>
+      </form>}
+      {this.state.logged && <CoffeeShop />}
+      </div>
     );
   }
 }

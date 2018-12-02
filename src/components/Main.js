@@ -18,12 +18,10 @@ class Main extends Component {
     }
 
     privateRoutes = [
-        <Route exact path='/' component={CoffeeShop} />,
         <Route exact path='/reviews/:id' component={EditReview} />,
         <Route exact path='/add' component={AddReview} />
     ];
     publicRoutes = [
-    <Route exact path='/' component={CoffeeShop} />,
     <Route exact path='/signin' render={() => <Signin changeLogged={this.changeLog} />} />,
     <Route exact path='/signup' render={() => <Signup />} />
     ];
@@ -32,6 +30,7 @@ class Main extends Component {
         return(
             <main>
                 <Switch>
+                <Route exact path='/' component={CoffeeShop} />,
                 {this.state.logged ? this.privateRoutes : this.publicRoutes}
                 </Switch>
             </main>

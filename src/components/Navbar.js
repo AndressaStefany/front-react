@@ -28,6 +28,7 @@ class Navbar extends Component {
 
   changeLog = () => {
     deleteTokenCookie();
+    window.location.reload();
   }
   
   render(){
