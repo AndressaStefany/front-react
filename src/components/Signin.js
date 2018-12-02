@@ -8,7 +8,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { loginRoute, request, saveTokenCookie, getCookie } from "./Auth/config";
+import { loginRoute, request, saveTokenCookie, getCookie, saveUserCookie } from "./Auth/config";
 import CoffeeShop from './CoffeShop';
 import { history } from './history';
 
@@ -56,6 +56,7 @@ class Signin extends Component {
     
     request.post(loginRoute, { email, password }).then(response => {
       saveTokenCookie(response.data.id);
+      saveUserCookie(response.data.userId);
       history.push('/');
       window.location.reload();
     });

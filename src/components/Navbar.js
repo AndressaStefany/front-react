@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import Button from '@material-ui/core/Button';
-import { deleteTokenCookie,getCookie } from './Auth/config';
+import { deleteTokenCookie, getCookie, deleteUserCookie } from './Auth/config';
+import { history } from './history';
 import '../App.css';
 
 const styles = {
@@ -28,6 +29,8 @@ class Navbar extends Component {
 
   changeLog = () => {
     deleteTokenCookie();
+    deleteUserCookie();
+    history.push('/');
     window.location.reload();
   }
   

@@ -8,7 +8,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { loginRegister, loginRoute, request, saveTokenCookie} from "./Auth/config";
+import { loginRegister, loginRoute, request, saveTokenCookie, saveUserCookie } from "./Auth/config";
 import { history } from './history';
 
 const styles = theme => ({
@@ -44,6 +44,7 @@ class Signup extends React.Component {
 
     request.post(loginRoute, { email, password }).then(response => {
       saveTokenCookie(response.data.id);
+      saveUserCookie(response.data.userId);
       history.push('/');
       window.location.reload();
       });

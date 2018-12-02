@@ -35,6 +35,15 @@ export const deleteTokenCookie = () => {
     }
   });
 };
+
+export const saveUserCookie = userId => {
+  setCookie("userId", userId);
+};
+
+export const deleteUserCookie = userId => {
+  setCookie("userId", "");
+}
+
 export const saveTokenCookie = token => {
   setCookie("token", token);
   request = axios.create({
